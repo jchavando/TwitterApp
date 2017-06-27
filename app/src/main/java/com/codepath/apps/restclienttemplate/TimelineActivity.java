@@ -1,10 +1,14 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -23,7 +27,8 @@ public class TimelineActivity extends AppCompatActivity {
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
 
-    final static private String TAG = "TwitterClient";
+    private final int REQUEST_CODE = 20;
+    private final String TAG = "TwitterClient";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,10 @@ public class TimelineActivity extends AppCompatActivity {
 
         //set the adapter
         rvTweets.setAdapter(tweetAdapter);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
 
         populateTimeline();
     }
@@ -101,4 +110,41 @@ public class TimelineActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.miCompose:
+                composeMessage();
+                return true;
+            case R.id.miProfile:
+                //showProfileView();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+//    private void composeMessage(){
+//        Intent i = new Intent(this, ComposeActivity.class);
+//        startActivityForResult(i, REQUEST_CODE);
+//
+//    }
+
+    public void composeMessage() {
+        Intent i = new Intent(this, ComposeActivity.class);
+        i.putExtra("mode", 2);
+        startActivityForResult(i, REQUEST_CODE);
+    }
+
+
 }

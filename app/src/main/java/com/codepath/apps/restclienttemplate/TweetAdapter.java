@@ -6,7 +6,6 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -57,6 +56,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
         holder.tvRelativeTimeStamp.setText(getRelativeTimeAgo(tweet.createdAt));
 
+        //holder.etEnteringText.getText().toString();
+
 
         Glide.with(context).load(tweet.user.profileImageUrl).into(holder.ivProfileImage);
     }
@@ -95,7 +96,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvRelativeTimeStamp;
 
         //new
-        public EditText etEnteringText;
+        //public EditText etEnteringText;
 
         public ViewHolder(View itemView){
             super(itemView);
