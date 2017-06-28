@@ -15,6 +15,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
@@ -67,6 +68,12 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d(TAG, response.toString());
+
+                //Tweet tweet = new Tweet(response);
+
+
+
+
             }
 
             @Override
@@ -126,25 +133,34 @@ public class TimelineActivity extends AppCompatActivity {
             case R.id.miCompose:
                 composeMessage();
                 return true;
-            case R.id.miProfile:
+            //case R.id.miProfile:
                 //showProfileView();
-                return true;
+               // return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
-//    private void composeMessage(){
-//        Intent i = new Intent(this, ComposeActivity.class);
-//        startActivityForResult(i, REQUEST_CODE);
-//
-//    }
 
     public void composeMessage() {
         Intent i = new Intent(this, ComposeActivity.class);
         i.putExtra("mode", 2);
         startActivityForResult(i, REQUEST_CODE);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        // REQUEST_CODE is defined above
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) { //check that code is the same
+            // Extract name value from result extras
+
+            Tweet unwrapped_tweet =  Parcels.unwrap(intent.getParcelableExtra("tweet"));
+            tweets.add(0, unwrapped_tweet);
+            tweetAdapter.notifyItemInserted(0);
+            rvTweets.scrollToPosition(0);
+
+        }
+    }
+
 
 
 }
