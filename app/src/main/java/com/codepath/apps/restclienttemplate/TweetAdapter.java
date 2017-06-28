@@ -56,9 +56,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
         holder.tvRelativeTimeStamp.setText(getRelativeTimeAgo(tweet.createdAt));
 
-        //holder.etEnteringText.getText().toString();
-
-
         Glide.with(context).load(tweet.user.profileImageUrl).into(holder.ivProfileImage);
     }
 
@@ -95,21 +92,27 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvBody;
         public TextView tvRelativeTimeStamp;
 
-        //new
-        //public EditText etEnteringText;
-
         public ViewHolder(View itemView){
             super(itemView);
-
             //perform findViewById lookups
-
             ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvRelativeTimeStamp = (TextView) itemView.findViewById(R.id.tvRelativeTimeStamp);
-
-            //etEnteringText = (EditText) itemView.findViewById(R.id.etEnteringText);
         }
 
     }
+
+
+    public void clear() {
+        mTweets.clear();
+        notifyDataSetChanged();
+    }
+    public void addAll(List<Tweet> list) {
+        mTweets.addAll(list);
+        notifyDataSetChanged();
+    }
+
+
+
 }

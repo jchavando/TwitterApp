@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -27,6 +28,7 @@ public class TimelineActivity extends AppCompatActivity {
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
+    private SwipeRefreshLayout swipeContainer;
 
     private final int REQUEST_CODE = 20;
     private final String TAG = "TwitterClient";
@@ -34,33 +36,77 @@ public class TimelineActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //at top
         setContentView(R.layout.activity_timeline);
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //refreshes list
+                fetchTimelineAsync(0);
+            }
+        });
+
+        //configure refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light, android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+
+
 
         client = TwitterApplication.getRestClient();
 
         //find RecyclerView
         rvTweets = (RecyclerView) findViewById(R.id.rvTweet);
-
         //init the arraylist (data source)
         tweets = new ArrayList<>();
-
         //construct adapter from datasource
         tweetAdapter = new TweetAdapter(tweets);
-
         //recyclerView setup (layout manager, use adapter)
         rvTweets.setLayoutManager(new LinearLayoutManager(this));
-
         //set the adapter
         rvTweets.setAdapter(tweetAdapter);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         populateTimeline();
     }
 
-    /*get back data from Twitter api
+
+    private void fetchTimelineAsync(int i) {
+        //send the network request to fetch the updated data
+        client.getHomeTimeline(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                tweetAdapter.clear();
+                tweets.clear();
+                Tweet tweet;
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        tweet = Tweet.fromJSON(response.getJSONObject(i));
+                        tweets.add(tweet);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                tweetAdapter.addAll(tweets);
+                swipeContainer.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.d("DEBUG", "fetch timeline error: " + throwable.toString());
+            }
+        });
+
+    }
+
+
+
+    /* get back data from Twitter api
         array for objects
     */
     private void populateTimeline(){
@@ -68,12 +114,6 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d(TAG, response.toString());
-
-                //Tweet tweet = new Tweet(response);
-
-
-
-
             }
 
             @Override
@@ -96,7 +136,6 @@ public class TimelineActivity extends AppCompatActivity {
                 }
 
             }
-
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 Log.d(TAG, responseString);

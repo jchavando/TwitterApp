@@ -23,10 +23,22 @@
         android:id="@+id/bTweet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
         android:text="Tweet"
-        android:onClick="sendTweet"/>
+        android:onClick="sendTweet"
+        android:layout_below="@+id/etEnteringText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="185dp"
+        android:background="@color/twitterBlue"/>
+
+    <EditText
+        android:id="@+id/te"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/bTweet"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
 
 
 </RelativeLayout>
