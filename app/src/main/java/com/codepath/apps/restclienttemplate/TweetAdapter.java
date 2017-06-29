@@ -52,7 +52,11 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         //populate the views according to this data
         holder.tvUsername.setText(tweet.user.name);
         holder.tvBody.setText(tweet.body);
+        holder.tvHandle.setText("@" + tweet.user.screenName);
 
+//        if(tvRelativeTimeStamp.toString().contains("minutes")){
+//
+//        }
 
         holder.tvRelativeTimeStamp.setText(getRelativeTimeAgo(tweet.createdAt));
 
@@ -91,6 +95,23 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvUsername;
         public TextView tvBody;
         public TextView tvRelativeTimeStamp;
+        public TextView tvHandle;
+
+//        private TextView mTextView;
+//        private EditText mEditText;
+//
+//        private final TextWatcher mTextEditorWatcher = new TextWatcher() {
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//            }
+//
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                //This sets a textview to the current length
+//                mTextView.setText(String.valueOf(s.length()));
+//            }
+//
+//            public void afterTextChanged(Editable s) {
+//            }
+//        };
 
         public ViewHolder(View itemView){
             super(itemView);
@@ -98,11 +119,10 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
+            tvHandle = (TextView) itemView.findViewById(R.id.tvHandle);
             tvRelativeTimeStamp = (TextView) itemView.findViewById(R.id.tvRelativeTimeStamp);
         }
-
     }
-
 
     public void clear() {
         mTweets.clear();
