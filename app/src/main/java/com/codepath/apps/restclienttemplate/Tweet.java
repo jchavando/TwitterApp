@@ -14,7 +14,8 @@ public class Tweet {
     public String body;
     public long uid; //database ID for the tweet
     public String createdAt;
-    //public String screenName;
+    public long retweetCount;
+    public boolean retweeted;
 
     public User user;
 
@@ -28,6 +29,8 @@ public class Tweet {
         tweet.uid = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
+        tweet.retweetCount = jsonObject.getLong("retweet_count");
+        tweet.retweeted = jsonObject.getBoolean("retweeted");
 
         return tweet;
     }

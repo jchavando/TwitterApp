@@ -47,4 +47,32 @@
         android:layout_marginStart="13dp"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/tvUsername" />
+
+    <ImageButton
+        android:id="@+id/ibRetweet"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/ic_vector_retweet_stroke"
+        android:onClick="retweet"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_toEndOf="@+id/tvBody" />
+
+    <TextView
+        android:id="@+id/tvRetweetCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ibRetweet"
+        />
+
+    <ImageButton
+        android:id="@+id/ibFavorites"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/ibRetweet"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="12dp"
+        app:srcCompat="@drawable/ic_vector_heart_stroke" />
 </RelativeLayout>

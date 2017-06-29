@@ -183,7 +183,7 @@ public class TimelineActivity extends AppCompatActivity {
 
     public void composeMessage() {
         Intent i = new Intent(this, ComposeActivity.class);
-        i.putExtra("mode", 2);
+        i.putExtra("tweet", 2);
         startActivityForResult(i, REQUEST_CODE);
     }
 
