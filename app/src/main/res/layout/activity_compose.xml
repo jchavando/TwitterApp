@@ -8,13 +8,10 @@
 
     <EditText
         android:id="@+id/etEnteringText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="What's happening?"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="2dp"
-        tools:layout_editor_absoluteY="-3dp"
         android:layout_marginTop="40dp"
         android:padding="50dp"
         android:layout_alignParentTop="true"

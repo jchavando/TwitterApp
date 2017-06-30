@@ -16,7 +16,7 @@ public class Tweet {
     public String createdAt;
     public long retweetCount;
     public boolean retweeted;
-    public long favoritesCount;
+    public long favoriteCount;
 
     public User user;
 
@@ -32,7 +32,7 @@ public class Tweet {
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
         tweet.retweetCount = jsonObject.getLong("retweet_count");
         tweet.retweeted = jsonObject.getBoolean("retweeted");
-        //tweet.favoritesCount = jsonObject.getLong("favorites_count"); //FIX
+        //tweet.favoriteCount = jsonObject.getLong("favorite_count"); //FIX
         return tweet;
     }
 }
