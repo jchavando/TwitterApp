@@ -24,6 +24,8 @@ import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 
+import static com.codepath.apps.restclienttemplate.R.color.colorBlack;
+
 /**
  * Created by jchavando on 6/26/17.
  */
@@ -34,6 +36,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     Context context;
     TwitterClient client;
     private final int greenColor = 0xff17bf63;
+    private final int blackColor = 0x00000;
 
     //pass in the Tweets array in the constructor
     public TweetAdapter(List<Tweet> tweets) {
@@ -71,28 +74,24 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         if(tweet.retweeted) {
             holder.ibRetweet.setColorFilter(greenColor);
             holder.tvRetweetCount.setTextColor(greenColor);
+
+        } else {
+            holder.ibRetweet.setColorFilter(colorBlack);
+            holder.tvRetweetCount.setTextColor(blackColor);
+
         }
-//        } else {
-//            holder.ibRetweet.setColorFilter(R.color.colorBlack);
-//            holder.tvRetweetCount.setTextColor(R.id.colorBlack);
-//
-//        }
 
 
-        String relativeTimeAgo = getRelativeTimeAgo(tweet.createdAt);
-        //holder.tvRelativeTimeStamp.setText(relativeTimeAgo); //20 minutes ago
+        //String relativeTimeAgo = getRelativeTimeAgo(tweet.createdAt);
 
-//        if(relativeTimeAgo.contains("minutes")){
-//            holder.tvRelativeTimeStamp.setText(relativeTimeAgo.replace("m"));
-//        } if (relativeTimeAgo.contains("hours")){
-//            holder.tvRelativeTimeStamp.setText(relativeTimeAgo + "h");
-//        } if (relativeTimeAgo.contains("seconds")){
-//            holder.tvRelativeTimeStamp.setText(relativeTimeAgo+ "s");
-//
-//        }
+
+        String relativeShortTimeAgo = replaceTime(getRelativeTimeAgo(tweet.createdAt));
+        holder.tvRelativeTimeStamp.setText(relativeShortTimeAgo); //20 minutes ago
 
         Glide.with(context).load(tweet.user.profileImageUrl).into(holder.ivProfileImage);
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -117,6 +116,30 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         return relativeDate;
     }
 
+    //converts "minutes" to "m" and so on
+    private String replaceTime(String relativeDate){
+        String newTime = relativeDate;
+        if (relativeDate.contains("minutes")) {
+            newTime = newTime.replaceAll(" minutes", "m");
+        } else if (relativeDate.contains("minute")){
+            newTime = newTime.replaceAll(" minute", "m");
+        } else if (relativeDate.contains("days")){
+            newTime = newTime.replaceAll(" days", "d");
+        } else if (relativeDate.contains("day")) {
+            newTime = newTime.replaceAll(" day", "d");
+        } else if (relativeDate.contains("hours")){
+            newTime = newTime.replaceAll(" hours", "h");
+        } else if (relativeDate.contains("hour")){
+            newTime = newTime.replaceAll(" hour", "h");
+        } else if (relativeDate.contains(" seconds")){
+            newTime = newTime.replaceAll("seconds", "s");
+        } else if (relativeDate.contains("second")) {
+            newTime = newTime.replaceAll(" second", "s");
+        }
+
+        newTime = newTime.replaceAll("ago", "");
+        return newTime;
+    }
 
     //create ViewHolder class
 
