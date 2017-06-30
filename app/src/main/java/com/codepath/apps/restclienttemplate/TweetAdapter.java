@@ -24,8 +24,6 @@ import java.util.Locale;
 
 import cz.msebera.android.httpclient.Header;
 
-import static com.codepath.apps.restclienttemplate.R.id.tvRelativeTimeStamp;
-
 /**
  * Created by jchavando on 6/26/17.
  */
@@ -69,15 +67,28 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         holder.tvHandle.setText("@" + tweet.user.screenName);
         holder.tvRetweetCount.setText(String.valueOf(tweet.retweetCount));
 
-        if(tweet.retweeted){
+
+        if(tweet.retweeted) {
             holder.ibRetweet.setColorFilter(greenColor);
             holder.tvRetweetCount.setTextColor(greenColor);
         }
+//        } else {
+//            holder.ibRetweet.setColorFilter(R.color.colorBlack);
+//            holder.tvRetweetCount.setTextColor(R.id.colorBlack);
+//
+//        }
 
 
         String relativeTimeAgo = getRelativeTimeAgo(tweet.createdAt);
-//        if( ){
-//            holder.tvRelativeTimeStamp.setText(relativeTimeAgo);
+        //holder.tvRelativeTimeStamp.setText(relativeTimeAgo); //20 minutes ago
+
+//        if(relativeTimeAgo.contains("minutes")){
+//            holder.tvRelativeTimeStamp.setText(relativeTimeAgo.replace("m"));
+//        } if (relativeTimeAgo.contains("hours")){
+//            holder.tvRelativeTimeStamp.setText(relativeTimeAgo + "h");
+//        } if (relativeTimeAgo.contains("seconds")){
+//            holder.tvRelativeTimeStamp.setText(relativeTimeAgo+ "s");
+//
 //        }
 
         Glide.with(context).load(tweet.user.profileImageUrl).into(holder.ivProfileImage);
@@ -117,6 +128,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvHandle;
         public ImageButton ibRetweet;
         public TextView tvRetweetCount;
+       // public ImageButton ibFavorites;
 
 
 
@@ -127,9 +139,10 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvHandle = (TextView) itemView.findViewById(R.id.tvHandle);
-            tvRelativeTimeStamp = (TextView) itemView.findViewById(tvRelativeTimeStamp);
+            tvRelativeTimeStamp = (TextView) itemView.findViewById(R.id.tvRelativeTimeStamp);
             tvRetweetCount = (TextView) itemView.findViewById(R.id.tvRetweetCount);
             ibRetweet = (ImageButton) itemView.findViewById(R.id.ibRetweet);
+            //ibFavorites = (ImageButton) itemView.findViewById(R.id.ibFavorites);
 
             ibRetweet.setOnClickListener(new ImageButton.OnClickListener() {
                 @Override
@@ -147,7 +160,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                                 Log.d("reweet", "success");
                                 try {
                                     tvRetweetCount.setText(String.valueOf(Tweet.fromJSON(response).retweetCount));
-
                                     ibRetweet.setColorFilter(greenColor);
                                     tvRetweetCount.setTextColor(greenColor);
                                 } catch (JSONException e) {
@@ -169,6 +181,47 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                 }
 
             });
+
+//            ibFavorites.setOnClickListener(new ImageButton.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int position = getAdapterPosition();
+//
+//                    //make sure the position is valid, actually exits in the view
+//                    if (position != RecyclerView.NO_POSITION) {
+//                        //get the movie at the position
+//                        Tweet tweet = mTweets.get(position);
+//                        client.retweet(tweet.uid, new JsonHttpResponseHandler() {
+//
+//                            @Override
+//                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                                Log.d("reweet", "success");
+//                                try {
+//                                    tvRetweetCount.setText(String.valueOf(Tweet.fromJSON(response).retweetCount));
+//
+//                                    ibRetweet.setColorFilter(greenColor);
+//                                    tvRetweetCount.setTextColor(greenColor);
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//
+//                                //Toast.makeText(this, "Retweeted", Toast.LENGTH_LONG).show();
+//                            }
+//
+//                            @Override
+//                            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+//                                Log.d("retweet", "error");
+//                                //Toast.makeText(this, "Retweet failed because account in protected", Toast.LENGTH_LONG).show();
+//
+//                            }
+//
+//                        });
+//                    }
+//                }
+//
+//            });
+
+
         }
     }
         public void clear() {

@@ -73,6 +73,14 @@ public class TwitterClient extends OAuthBaseClient {
 		client.post(apiUrl, handler);
 	}
 
+//	public void favorite(Long uid, AsyncHttpResponseHandler handler) {
+//		String apiUrl = getApiUrl("favorites/create/");
+//		// Can specify query string params directly or through RequestParams.
+//		RequestParams params = new RequestParams();
+//		params.put("status", message);
+//		client.post(apiUrl, params, handler);
+//
+//	}
 
 
 

@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -30,12 +31,15 @@ public class ComposeActivity extends AppCompatActivity {
     Button bTweet;
 
     TextView mTextView;
+    ImageButton ibExit;
 
 
 
     private final String TAG = "ComposeActivity";
 
 
+
+    //character count
     private final TextWatcher mTextEditorWatcher = new TextWatcher() {
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
@@ -59,8 +63,6 @@ public class ComposeActivity extends AppCompatActivity {
 
         mTextView = (TextView) findViewById(R.id.tvCharacters);
         etEnteringText.addTextChangedListener(mTextEditorWatcher);
-
-
 
 
         bTweet = (Button) findViewById(R.id.bTweet);
@@ -93,6 +95,15 @@ public class ComposeActivity extends AppCompatActivity {
 
         });
 
+        ibExit = (ImageButton) findViewById(R.id.ibExit);
+        ibExit.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+
+
+        });
 
 
     }
