@@ -59,6 +59,7 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Describe any challenges encountered while building the app.
+I was challenged with intially setting up the click for compose tweet, retweet, and favorite. The UI design was also hard to build as there are many specifications.
 
 ## Open-source libraries used
 
