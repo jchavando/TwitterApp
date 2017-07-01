@@ -34,8 +34,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     Context context;
     TwitterClient client;
     private final int greenColor = 0xff17bf63;
-    private final int blackColor = 0x00000;
-    private final int redColor = 0xff0000;
+    private final int blackColor = 0xff0000ff;
+    private final int redColor = 0xffff0000;
 
     //pass in the Tweets array in the constructor
     public TweetAdapter(List<Tweet> tweets) {
@@ -80,16 +80,12 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             holder.tvRetweetCount.setTextColor(blackColor);
 
         }
-
-
         if(tweet.favorited){
             holder.ibFavorites.setColorFilter(redColor);
             holder.tvFavoriteCount.setTextColor(redColor);
         } else {
-            //holder.ibFavorites.setColorFilter(blackColor);
+            holder.ibFavorites.setColorFilter(blackColor);
             holder.tvFavoriteCount.setTextColor(blackColor);
-            holder.ibFavorites.setColorFilter(redColor);
-
             Log.d("favorites", "black");
         }
 

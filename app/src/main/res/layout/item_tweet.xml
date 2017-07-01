@@ -22,7 +22,7 @@
 
     <TextView
         android:id="@+id/tvBody"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvUsername"
         android:layout_toEndOf="@+id/ivProfileImage"
@@ -56,7 +56,8 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_vector_retweet_stroke"
         android:layout_below="@+id/tvBody"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
          />
     <TextView
         android:id="@+id/tvRetweetCount"
@@ -65,29 +66,28 @@
         android:text="300"
         android:layout_below="@+id/tvBody"
         android:layout_toEndOf="@+id/ibRetweet"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="15dp"
+        />
 
     <ImageButton
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:layout_below="@+id/tvBody"
-        android:layout_marginTop="20dp"
         android:id="@+id/ibFavorites"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="10dp"
         app:srcCompat="@drawable/ic_vector_heart_stroke" />
 
     <TextView
         android:id="@+id/tvFavoriteCount"
-
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:text="100"
         android:layout_below="@+id/tvBody"
+        android:layout_marginTop="15dp"
         android:layout_toEndOf="@+id/ibFavorites"
-        android:layout_marginTop="30dp"
-
 
         />
 

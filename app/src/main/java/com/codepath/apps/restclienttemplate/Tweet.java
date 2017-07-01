@@ -1,5 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcel;
@@ -28,6 +30,9 @@ public class Tweet {
 
         //extract the values from JSON
         tweet.body = jsonObject.getString("text");
+        if(tweet.body.equals("4:44")) {
+            Log.i("","");
+        }
         tweet.uid = jsonObject.getLong("id");
         tweet.createdAt = jsonObject.getString("created_at");
         tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
