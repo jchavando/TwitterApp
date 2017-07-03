@@ -32,11 +32,10 @@
                     android:host="@string/intent_host"
                     android:scheme="@string/intent_scheme" />
             </intent-filter>
-
         </activity>
-
-        <activity android:name=".TimelineActivity"/>
-        <activity android:name=".ComposeActivity"></activity>
+        <activity android:name=".TimelineActivity" />
+        <activity android:name=".ComposeActivity" />
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>
