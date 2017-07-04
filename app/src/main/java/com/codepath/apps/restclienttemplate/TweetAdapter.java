@@ -36,11 +36,17 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     private final int greenColor = 0xff17bf63;
     private final int blackColor = 0xff0000ff;
     private final int redColor = 0xffff0000;
+    private TweetAdapterListener mListener;
 
+    //define an interface required by the ViewHolder
+    public interface TweetAdapterListener{
+        public void onItemSelected (View view, int position);
+    }
     //pass in the Tweets array in the constructor
-    public TweetAdapter(List<Tweet> tweets) {
+    public TweetAdapter(List<Tweet> tweets, TweetAdapterListener listener) {
         mTweets = tweets;
         client = TwitterApplication.getRestClient();
+        mListener = listener;
     }
 
     //for each row, inflate layout and cache (pass) references into ViewHolder
@@ -141,6 +147,10 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             newTime = newTime.replaceAll("seconds", "s");
         } else if (relativeDate.contains("second")) {
             newTime = newTime.replaceAll(" second", "s");
+        } else if (relativeDate.contains("week")) {
+            newTime = newTime.replaceAll(" week", "w");
+        } else if (relativeDate.contains("weeks")) {
+            newTime = newTime.replaceAll(" weeks", "w");
         }
 
         newTime = newTime.replaceAll("ago", "");
@@ -175,6 +185,21 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             ibFavorites = (ImageButton) itemView.findViewById(R.id.ibFavorites);
             tvFavoriteCount = (TextView) itemView.findViewById(R.id.tvFavoriteCount);
 
+
+            //handle row click event
+            itemView.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    if(mListener != null){
+                        //get the position of row element
+                        int position = getAdapterPosition();
+                        //fire the listener callback
+                        mListener.onItemSelected(v, position);
+                    }
+
+                }
+            });
 
             //Retweet
             ibRetweet.setOnClickListener(new ImageButton.OnClickListener() {
