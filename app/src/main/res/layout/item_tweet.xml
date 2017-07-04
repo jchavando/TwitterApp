@@ -4,8 +4,8 @@
     android:layout_margin="5dp"
     android:layout_width="match_parent" android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/ivProfileImage"
+    <ImageButton
+        android:id="@+id/ibProfileImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         app:srcCompat="@android:color/black"
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvUsername"
-        android:layout_toEndOf="@+id/ivProfileImage"
+        android:layout_toEndOf="@+id/ibProfileImage"
         android:text="sample tweet blah blah"
         android:layout_marginLeft="5dp"
         />

@@ -99,7 +99,16 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         String relativeShortTimeAgo = replaceTime(getRelativeTimeAgo(tweet.createdAt));
         holder.tvRelativeTimeStamp.setText(relativeShortTimeAgo); //20 minutes ago
 
-        Glide.with(context).load(tweet.user.profileImageUrl).into(holder.ivProfileImage);
+        Glide.with(context).load(tweet.user.profileImageUrl).into(holder.ibProfileImage);
+        holder.ibProfileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //adapter -> fragment/context -> activity
+
+            }
+        });
+
+
 
     }
 
@@ -160,7 +169,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     //create ViewHolder class
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public ImageView ivProfileImage;
+        public ImageView ibProfileImage;
         public TextView tvUsername;
         public TextView tvBody;
         public TextView tvRelativeTimeStamp;
@@ -175,7 +184,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public ViewHolder(View itemView) {
             super(itemView);
             //perform findViewById lookups
-            ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImage);
+            ibProfileImage = (ImageView) itemView.findViewById(R.id.ibProfileImage);
             tvUsername = (TextView) itemView.findViewById(R.id.tvUsername);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             tvHandle = (TextView) itemView.findViewById(R.id.tvHandle);
