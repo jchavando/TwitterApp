@@ -93,4 +93,5 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
         Tweet tweet = tweets.get(position);
         ((TweetSelectedListener) getActivity()).onTweetSelected(tweet);
     }
+
 }

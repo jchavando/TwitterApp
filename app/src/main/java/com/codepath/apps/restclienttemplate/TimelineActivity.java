@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.fragments.TweetsListFragment;
@@ -103,11 +104,11 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
 //        }
 //    }
 //
-//    public void composeMessage() {
-//        Intent i = new Intent(this, ComposeActivity.class);
-//        i.putExtra("tweet", 2);
-//        startActivityForResult(i, REQUEST_CODE);
-//    }
+    public void composeMessage(View v) {
+        Intent i = new Intent(this, ComposeActivity.class);
+        i.putExtra("tweet", 2);
+        startActivityForResult(i, REQUEST_CODE);
+    }
 
     public void onProfileView(MenuItem item) {
         //launch the profile view
