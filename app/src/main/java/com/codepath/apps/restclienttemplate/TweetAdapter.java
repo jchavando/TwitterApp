@@ -34,7 +34,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     Context context;
     TwitterClient client;
     private final int greenColor = 0xff17bf63;
-    private final int blackColor = 0xff0000ff;
+    private final int blackColor = 0xffff0000;
     private final int redColor = 0xffff0000;
     private TweetAdapterListener mListener;
 
@@ -93,12 +93,10 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         } else {
             holder.ibFavorites.setColorFilter(blackColor);
             holder.tvFavoriteCount.setTextColor(blackColor);
-            Log.d("favorites", "black");
         }
 
-
         String relativeShortTimeAgo = replaceTime(getRelativeTimeAgo(tweet.createdAt));
-        holder.tvRelativeTimeStamp.setText(relativeShortTimeAgo); //20 minutes ago
+        holder.tvRelativeTimeStamp.setText(" · " + relativeShortTimeAgo); //20 minutes ago
 
         Glide.with(context).load(tweet.user.profileImageUrl).into(holder.ibProfileImage);
 
@@ -106,12 +104,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         holder.ibProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //adapter -> fragment/context -> activity
-
                 mListener.onItemSelected(v, position, true);
             }
         });
-
 
     }
 

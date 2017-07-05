@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/twitterBlue">
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src= "@drawable/ic_icon" />
+        android:orientation="vertical">
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/twitterBlue">
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src= "@drawable/ic_icon" />
+</android.support.v7.widget.Toolbar>
 
-    </android.support.v7.widget.Toolbar>
 
 <android.support.design.widget.TabLayout
     android:id="@+id/sliding_tabs"
@@ -23,21 +27,25 @@ android:orientation="vertical">
     android:layout_height="wrap_content"
     app:tabMode="fixed" />
 
+
 <android.support.v4.view.ViewPager
     android:id="@+id/viewpager"
     android:layout_width="match_parent"
     android:layout_height="0px"
     android:layout_weight="1"
     android:background="@android:color/white" />
+    </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabCompose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/vector_compose_shortcut"
-        app:fabSize="normal"
-        android:scaleType="center"
-        android:layout_marginLeft="320dp"
-        android:onClick="composeMessage"/>
+<android.support.design.widget.FloatingActionButton
+    android:id="@+id/fabCompose"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/vector_compose_shortcut"
+    app:fabSize="normal"
+    android:scaleType="center"
+    android:onClick="composeMessage"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentEnd="true" />
 
-</LinearLayout>
+
+</RelativeLayout>

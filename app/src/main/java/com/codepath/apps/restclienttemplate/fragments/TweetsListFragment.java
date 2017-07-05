@@ -30,11 +30,11 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
         public void onImageSelected(Tweet tweet);
 
     }
-
+    private final int REQUEST_CODE = 20;
     TweetAdapter tweetAdapter;
     ArrayList<Tweet> tweets;
     RecyclerView rvTweets;
-    private SwipeRefreshLayout swipeContainer; //do I move this?
+    public SwipeRefreshLayout swipeContainer; //do I move this?
 
     //inflation happens inside onCreateView
 
@@ -61,7 +61,7 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
             @Override
             public void onRefresh() {
                 //refreshes list
-                //fetchTimelineAsync(0);
+                fetchTimelineAsync();
 
             }
         });
@@ -72,6 +72,10 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
                 android.R.color.holo_red_light);
         return v;
     }
+
+    public void fetchTimelineAsync(){}
+
+
 
     public void addItems (JSONArray response){
         for (int i = 0; i < response.length(); i++){
@@ -99,5 +103,19 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
        }
 
     }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+//        // REQUEST_CODE is defined above
+//        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) { //check that code is the same
+//            // Extract name value from result extras
+//
+//            Tweet unwrapped_tweet =  Parcels.unwrap(intent.getParcelableExtra("tweet"));
+//            tweets.add(0, unwrapped_tweet);
+//            tweetAdapter.notifyItemInserted(0);
+//            rvTweets.scrollToPosition(0);
+//
+//        }
+//    }
 
 }

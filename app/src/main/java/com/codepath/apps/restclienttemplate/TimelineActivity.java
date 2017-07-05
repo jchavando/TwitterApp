@@ -16,8 +16,8 @@ import com.codepath.apps.restclienttemplate.fragments.TweetsPagerAdapter;
 
 //basically now just loads fragments onto the screen
 public class TimelineActivity extends AppCompatActivity implements TweetsListFragment.TweetSelectedListener {
-
     private final int REQUEST_CODE = 20;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,38 +42,6 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         getSupportActionBar().setTitle(null);
 
     }
-
-
-//    private void fetchTimelineAsync(int i) {
-//        //send the network request to fetch the updated data
-//        client.getHomeTimeline(new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-//                tweetAdapter.clear();
-//                tweets.clear();
-//                Tweet tweet;
-//
-//                for (int i = 0; i < response.length(); i++) {
-//                    try {
-//                        tweet = Tweet.fromJSON(response.getJSONObject(i));
-//                        tweets.add(tweet);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//                tweetAdapter.addAll(tweets);
-//                swipeContainer.setRefreshing(false);
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-//                Log.d("DEBUG", "fetch timeline error: " + throwable.toString());
-//            }
-//        });
-//
-//    }
-
-
 
     /* get back data from Twitter api
         array for objects

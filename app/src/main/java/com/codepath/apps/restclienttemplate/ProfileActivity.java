@@ -50,7 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         client = TwitterApplication.getRestClient();
 
-        if(TextUtils.isEmpty(screenName)) {
+        if (TextUtils.isEmpty(screenName)) { //if null, default to your own profile
             client.getUserInfo(new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -69,6 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 }
             });
+
         } else {
             client.getAnotherUserInfo(screenName, new JsonHttpResponseHandler() {
 
@@ -86,9 +87,7 @@ public class ProfileActivity extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
-
 
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
@@ -99,28 +98,6 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         }
-
-
-
-
-//        client.getAnotherUserInfo(screenName, new JsonHttpResponseHandler(){
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                //deserialize the user object
-//                User user = null;
-//                try {
-//                    user = User.fromJSON(response);
-//                    //set the title of the ActionBar based on the user information
-//                    getSupportActionBar().setTitle(user.screenName);
-//                    //populate the user headline
-//                    populateUserHeadline(user);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//        });
-
 
     }
 

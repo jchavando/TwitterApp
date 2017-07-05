@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.codepath.apps.restclienttemplate.Tweet;
 import com.codepath.apps.restclienttemplate.TwitterApplication;
 import com.codepath.apps.restclienttemplate.TwitterClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -22,7 +24,7 @@ public class UserTimelineFragment extends TweetsListFragment {
 
         TwitterClient client;
         private final String TAG = "TwitterClient";
-
+        String screenName;
 
         public static UserTimelineFragment newInstance (String screenName){
             UserTimelineFragment userTimelineFragment = new UserTimelineFragment();
@@ -39,9 +41,39 @@ public class UserTimelineFragment extends TweetsListFragment {
             populateTimeline();
         }
 
+    @Override
+    public void fetchTimelineAsync(){
+        //send the network request to fetch the updated data
+        client.getUserTimeline(screenName, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                tweetAdapter.clear();
+                tweets.clear();
+                Tweet tweet;
+
+                for (int i = 0; i < response.length(); i++) {
+                    try {
+                        tweet = Tweet.fromJSON(response.getJSONObject(i));
+                        tweets.add(tweet);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                tweetAdapter.addAll(tweets);
+                swipeContainer.setRefreshing(false);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                Log.d("DEBUG", "fetch timeline error: " + throwable.toString());
+            }
+        });
+    }
+
         private void populateTimeline(){
             //comes from the activity
-            String screenName = getArguments().getString("screen_name"); //unpackaging bundle
+            screenName = getArguments().getString("screen_name"); //unpackaging bundle
+
             client.getUserTimeline(screenName, new JsonHttpResponseHandler(){
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
