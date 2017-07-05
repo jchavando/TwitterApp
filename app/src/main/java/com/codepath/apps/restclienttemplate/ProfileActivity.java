@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,16 +16,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.util.TextUtils;
 
 public class ProfileActivity extends AppCompatActivity {
 
     TwitterClient client;
+    Tweet tweet;
+   // boolean isTweet = tweet.uid != null && tweet.uid==uid;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        String screenName = getIntent().getStringExtra("screen_name");
+        final String screenName = getIntent().getStringExtra("screen_name");
 
         //create the user fragment
         UserTimelineFragment userTimelineFragment = UserTimelineFragment.newInstance(screenName);
@@ -44,26 +49,100 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(null);
 
         client = TwitterApplication.getRestClient();
-        client.getUserInfo(new JsonHttpResponseHandler(){
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                //deserialize the user object
-                User user = null;
-                try {
-                    user = User.fromJSON(response);
-                    //set the title of the ActionBar based on the user information
 
-                    getSupportActionBar().setTitle(user.screenName);
-                    //populate the user headline
-                    populateUserHeadline(user);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+        if(TextUtils.isEmpty(screenName)) {
+            client.getUserInfo(new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    //deserialize the user object
+                    User user = null;
+                    try {
+                        user = User.fromJSON(response);
+                        //set the title of the ActionBar based on the user information
+
+                        getSupportActionBar().setTitle(user.screenName);
+                        //populate the user headline
+                        populateUserHeadline(user);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            });
+        } else {
+            client.getAnotherUserInfo(screenName, new JsonHttpResponseHandler() {
+
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    //deserialize the user object
+                    User user = null;
+                    try {
+                        user = User.fromJSON(response);
+                        //set the title of the ActionBar based on the user information
+
+                        getSupportActionBar().setTitle(user.screenName);
+                        //populate the user headline
+                        populateUserHeadline(user);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 }
 
-            }
-        });
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                    Log.d("profile", screenName);
+                    Log.d("profile", errorResponse.toString());
+                }
+            });
+
+
+        }
+
+
+
+
+//        client.getAnotherUserInfo(screenName, new JsonHttpResponseHandler(){
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                //deserialize the user object
+//                User user = null;
+//                try {
+//                    user = User.fromJSON(response);
+//                    //set the title of the ActionBar based on the user information
+//                    getSupportActionBar().setTitle(user.screenName);
+//                    //populate the user headline
+//                    populateUserHeadline(user);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//        });
+
 
     }
+
+//    public void jsonResponse(){
+//        new JsonHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                //deserialize the user object
+//                User user = null;
+//                try {
+//                    user = User.fromJSON(response);
+//                    //set the title of the ActionBar based on the user information
+//
+//                    getSupportActionBar().setTitle(user.screenName);
+//                    //populate the user headline
+//                    populateUserHeadline(user);
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//    }
     public void populateUserHeadline(User user){
         TextView tvName = (TextView) findViewById(R.id.tvName);
         TextView tvTagline = (TextView) findViewById(R.id.tvTagline);

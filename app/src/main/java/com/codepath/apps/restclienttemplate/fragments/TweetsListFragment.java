@@ -27,7 +27,7 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
     public interface TweetSelectedListener {
         //handle tweet selection
         public void onTweetSelected(Tweet tweet);
-
+        public void onImageSelected(Tweet tweet);
 
     }
 
@@ -49,7 +49,7 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
         //init the arraylist (data source)
         tweets = new ArrayList<>();
         //construct adapter from datasource
-        tweetAdapter = new TweetAdapter(tweets, this);
+        tweetAdapter = new TweetAdapter(tweets, this); //this
         //recyclerView setup (layout manager, use adapter)
         rvTweets.setLayoutManager(new LinearLayoutManager(getContext()));
         //set the adapter
@@ -62,6 +62,7 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
             public void onRefresh() {
                 //refreshes list
                 //fetchTimelineAsync(0);
+
             }
         });
 
@@ -89,9 +90,14 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
     }
 
     @Override
-    public void onItemSelected(View view, int position) {
-        Tweet tweet = tweets.get(position);
-        ((TweetSelectedListener) getActivity()).onTweetSelected(tweet);
+    public void onItemSelected(View view, int position, boolean isPic) {
+       Tweet tweet = tweets.get(position);
+        if(!isPic) {
+           ((TweetSelectedListener) getActivity()).onTweetSelected(tweet);
+       } else {
+           ((TweetSelectedListener) getActivity()).onImageSelected(tweet);
+       }
+
     }
 
 }

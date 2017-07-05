@@ -36,6 +36,7 @@ android:orientation="vertical">
         android:layout_height="wrap_content"
         android:src="@drawable/vector_compose_shortcut"
         app:fabSize="normal"
+        android:scaleType="center"
         android:layout_marginLeft="320dp"
         android:onClick="composeMessage"/>
 

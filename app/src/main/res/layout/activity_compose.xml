@@ -28,7 +28,7 @@
         android:layout_alignParentEnd="true"
         android:background="@drawable/rounded"/>
 
-    <EditText
+    <TextView
         android:id="@+id/tvCharacters"
         android:layout_marginLeft="210dp"
         android:layout_width="40dp"
@@ -40,11 +40,12 @@
 
     <ImageButton
         android:id="@+id/ibExit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        app:srcCompat="@drawable/ic_vector_close" />
+        app:srcCompat="@drawable/ic_vector_close"
+        android:backgroundTint="@color/transparent_white"/>
 
 
 </RelativeLayout>

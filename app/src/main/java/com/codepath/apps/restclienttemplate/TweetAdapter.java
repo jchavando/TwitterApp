@@ -38,9 +38,10 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     private final int redColor = 0xffff0000;
     private TweetAdapterListener mListener;
 
+
     //define an interface required by the ViewHolder
     public interface TweetAdapterListener{
-        public void onItemSelected (View view, int position);
+        public void onItemSelected (View view, int position, boolean isPic);
     }
     //pass in the Tweets array in the constructor
     public TweetAdapter(List<Tweet> tweets, TweetAdapterListener listener) {
@@ -65,9 +66,9 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     //bind the values based on the position of the element
     //repopulate data based on position
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         //get the data according to position
-        Tweet tweet = mTweets.get(position); //returns tweet object
+        final Tweet tweet = mTweets.get(position); //returns tweet object
 
         //populate the views according to this data
         holder.tvUsername.setText(tweet.user.name);
@@ -100,14 +101,16 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         holder.tvRelativeTimeStamp.setText(relativeShortTimeAgo); //20 minutes ago
 
         Glide.with(context).load(tweet.user.profileImageUrl).into(holder.ibProfileImage);
+
+
         holder.ibProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //adapter -> fragment/context -> activity
 
+                mListener.onItemSelected(v, position, true);
             }
         });
-
 
 
     }
@@ -204,7 +207,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                         //get the position of row element
                         int position = getAdapterPosition();
                         //fire the listener callback
-                        mListener.onItemSelected(v, position);
+                        mListener.onItemSelected(v, position, false);
                     }
 
                 }

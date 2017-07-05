@@ -118,8 +118,22 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
 
     @Override
     public void onTweetSelected(Tweet tweet) {
+        //move to user's profile
+       // Intent intent = new Intent(this, ProfileActivity.class);
         Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onImageSelected(Tweet tweet) {
+        //move to user's profile
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("screen_name", tweet.user.screenName);
+        startActivity(intent);
+
+    }
+
+
+
 
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
