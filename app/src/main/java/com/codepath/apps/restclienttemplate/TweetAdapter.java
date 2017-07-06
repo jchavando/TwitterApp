@@ -82,29 +82,27 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
 
         if(tweet.retweeted) {
-            //holder.ibRetweet.setColorFilter(greenColor);
-
             holder.tvRetweetCount.setTextColor(greenColor);
-            holder.ibFavorites.setImageResource(R.drawable.ic_heart_filled);
+            holder.ibRetweet.setImageResource(R.drawable.retweet_green);
         } else {
-           // holder.ibRetweet.setColorFilter(blackColor);
             holder.tvRetweetCount.setTextColor(blackColor);
-
+            holder.ibRetweet.setImageResource(R.drawable.ic_vector_retweet_stroke);
         }
+
         if(tweet.favorited){
-            //holder.ibFavorites.setColorFilter(redColor);
             holder.tvFavoriteCount.setTextColor(redColor);
             holder.ibFavorites.setImageResource(R.drawable.ic_heart_filled);
 
         } else {
-            //holder.ibFavorites.setColorFilter(blackColor);
             holder.tvFavoriteCount.setTextColor(blackColor);
+            holder.ibFavorites.setImageResource(R.drawable.ic_vector_heart_stroke);
+
         }
 
 
 
 
-        
+
         String relativeShortTimeAgo = replaceTime(getRelativeTimeAgo(tweet.createdAt));
         holder.tvRelativeTimeStamp.setText(" · " + relativeShortTimeAgo); //20 minutes ago
 
@@ -187,7 +185,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public ImageButton ibFavorites;
         public TextView tvFavoriteCount;
         public ImageButton ibReply;
-        public TextView tvReplyCount;
 
 
 
@@ -204,7 +201,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             ibFavorites = (ImageButton) itemView.findViewById(R.id.ibFavorites);
             tvFavoriteCount = (TextView) itemView.findViewById(R.id.tvFavoriteCount);
             ibReply = (ImageButton) itemView.findViewById(R.id.ibReply);
-            tvReplyCount = (TextView) itemView.findViewById(R.id.tvReplyCount);
 
             //handle row click event
             itemView.setOnClickListener(new View.OnClickListener(){
@@ -238,8 +234,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                                 Log.d("reweet", "success");
                                 try {
                                     tvRetweetCount.setText(String.valueOf(Tweet.fromJSON(response).retweetCount));
-                                    //ibRetweet.setColorFilter(greenColor);
-                                    //tvRetweetCount.setTextColor(greenColor);
+                                    ibRetweet.setImageResource(R.drawable.retweet_green);
+                                    tvRetweetCount.setTextColor(greenColor);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -273,8 +269,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                                 Log.d("favorite", "success");
                                 try {
                                     tvFavoriteCount.setText(String.valueOf(Tweet.fromJSON(response).favoriteCount));
-                                    //ibFavorites.setColorFilter(redColor);
-                                    //tvFavoriteCount.setTextColor(redColor);
+                                    ibFavorites.setImageResource(R.drawable.ic_heart_filled);
+                                    tvFavoriteCount.setTextColor(redColor);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -299,6 +295,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                         Tweet tweet = mTweets.get(position);
                         Intent intent = new Intent(context, ComposeActivity.class);
                         intent.putExtra("username", tweet.user.screenName);
+                        //tvReplyCount.setText(String.valueOf(Tweet.fromJSON(response).ReplyCount));
+
                         ((AppCompatActivity)context).startActivityForResult(intent, REQUEST_CODE);
                     }
                 }

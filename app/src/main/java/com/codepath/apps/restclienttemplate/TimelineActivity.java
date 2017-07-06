@@ -13,6 +13,9 @@ import android.view.View;
 import com.codepath.apps.restclienttemplate.fragments.TweetsListFragment;
 import com.codepath.apps.restclienttemplate.fragments.TweetsPagerAdapter;
 
+import static com.codepath.apps.restclienttemplate.R.drawable.ic_vector_home_stroke;
+import static com.codepath.apps.restclienttemplate.R.drawable.ic_vector_notifications_stroke;
+
 //basically now just loads fragments onto the screen
 public class TimelineActivity extends AppCompatActivity implements TweetsListFragment.TweetSelectedListener {
     private final int REQUEST_CODE = 20;
@@ -34,6 +37,8 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vpPager);
 
+        tabLayout.getTabAt(0).setIcon(ic_vector_home_stroke);
+        tabLayout.getTabAt(1).setIcon(ic_vector_notifications_stroke);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -96,7 +101,6 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         startActivity(intent);
 
     }
-
 
 
 
