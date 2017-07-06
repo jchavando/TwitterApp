@@ -9,7 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.fragments.TweetsListFragment;
 import com.codepath.apps.restclienttemplate.fragments.TweetsPagerAdapter;
@@ -46,8 +45,6 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
     /* get back data from Twitter api
         array for objects
     */
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -88,7 +85,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
     public void onTweetSelected(Tweet tweet) {
         //move to user's profile
        // Intent intent = new Intent(this, ProfileActivity.class);
-        Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
     }
 
     @Override

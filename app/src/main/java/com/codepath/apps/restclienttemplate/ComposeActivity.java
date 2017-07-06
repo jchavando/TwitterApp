@@ -95,6 +95,12 @@ public class ComposeActivity extends AppCompatActivity {
 
         });
 
+        String reply = getIntent().getStringExtra("username");
+        if (reply != null) {
+            etEnteringText.setText("@" + reply);
+            etEnteringText.setSelection(etEnteringText.getText().length());
+        }
+
         ibExit = (ImageButton) findViewById(R.id.ibExit);
         ibExit.setOnClickListener(new View.OnClickListener(){
             @Override

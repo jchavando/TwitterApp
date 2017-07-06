@@ -1,6 +1,8 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -37,6 +39,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     private final int blackColor = 0xff0000ff; //
     private final int redColor = 0xffff0000;
     private TweetAdapterListener mListener;
+    private final int REQUEST_CODE = 20;
 
 
     //define an interface required by the ViewHolder
@@ -78,21 +81,30 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         holder.tvFavoriteCount.setText(String.valueOf(tweet.favoriteCount));
 
 
-//        if(tweet.retweeted) {
-//            holder.ibRetweet.setColorFilter(greenColor);
-//            holder.tvRetweetCount.setTextColor(greenColor);
-//        } else {
-//            holder.ibRetweet.setColorFilter(blackColor);
-//            holder.tvRetweetCount.setTextColor(blackColor);
-//        }
-//        if(tweet.favorited){
-//            holder.ibFavorites.setColorFilter(redColor);
-//            holder.tvFavoriteCount.setTextColor(redColor);
-//        } else {
-//            holder.ibFavorites.setColorFilter(blackColor);
-//            holder.tvFavoriteCount.setTextColor(blackColor);
-//        }
+        if(tweet.retweeted) {
+            //holder.ibRetweet.setColorFilter(greenColor);
 
+            holder.tvRetweetCount.setTextColor(greenColor);
+            holder.ibFavorites.setImageResource(R.drawable.ic_heart_filled);
+        } else {
+           // holder.ibRetweet.setColorFilter(blackColor);
+            holder.tvRetweetCount.setTextColor(blackColor);
+
+        }
+        if(tweet.favorited){
+            //holder.ibFavorites.setColorFilter(redColor);
+            holder.tvFavoriteCount.setTextColor(redColor);
+            holder.ibFavorites.setImageResource(R.drawable.ic_heart_filled);
+
+        } else {
+            //holder.ibFavorites.setColorFilter(blackColor);
+            holder.tvFavoriteCount.setTextColor(blackColor);
+        }
+
+
+
+
+        
         String relativeShortTimeAgo = replaceTime(getRelativeTimeAgo(tweet.createdAt));
         holder.tvRelativeTimeStamp.setText(" · " + relativeShortTimeAgo); //20 minutes ago
 
@@ -174,6 +186,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvRetweetCount;
         public ImageButton ibFavorites;
         public TextView tvFavoriteCount;
+        public ImageButton ibReply;
+        public TextView tvReplyCount;
 
 
 
@@ -189,7 +203,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             ibRetweet = (ImageButton) itemView.findViewById(R.id.ibRetweet);
             ibFavorites = (ImageButton) itemView.findViewById(R.id.ibFavorites);
             tvFavoriteCount = (TextView) itemView.findViewById(R.id.tvFavoriteCount);
-
+            ibReply = (ImageButton) itemView.findViewById(R.id.ibReply);
+            tvReplyCount = (TextView) itemView.findViewById(R.id.tvReplyCount);
 
             //handle row click event
             itemView.setOnClickListener(new View.OnClickListener(){
@@ -223,8 +238,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                                 Log.d("reweet", "success");
                                 try {
                                     tvRetweetCount.setText(String.valueOf(Tweet.fromJSON(response).retweetCount));
-                                    ibRetweet.setColorFilter(greenColor);
-                                    tvRetweetCount.setTextColor(greenColor);
+                                    //ibRetweet.setColorFilter(greenColor);
+                                    //tvRetweetCount.setTextColor(greenColor);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -258,8 +273,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                                 Log.d("favorite", "success");
                                 try {
                                     tvFavoriteCount.setText(String.valueOf(Tweet.fromJSON(response).favoriteCount));
-                                    ibFavorites.setColorFilter(redColor);
-                                    tvFavoriteCount.setTextColor(redColor);
+                                    //ibFavorites.setColorFilter(redColor);
+                                    //tvFavoriteCount.setTextColor(redColor);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -271,6 +286,20 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                             }
 
                         });
+                    }
+                }
+            });
+
+            ibReply.setOnClickListener(new View.OnClickListener(){
+
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if(position != RecyclerView.NO_POSITION) {
+                        Tweet tweet = mTweets.get(position);
+                        Intent intent = new Intent(context, ComposeActivity.class);
+                        intent.putExtra("username", tweet.user.screenName);
+                        ((AppCompatActivity)context).startActivityForResult(intent, REQUEST_CODE);
                     }
                 }
             });

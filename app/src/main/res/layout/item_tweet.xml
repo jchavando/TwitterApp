@@ -59,9 +59,10 @@
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:background="@color/transparent_white"
         android:tint="@color/transparent_white" />
+
     <TextView
         android:id="@+id/tvReplyCount"
         android:layout_width="90dp"
@@ -69,7 +70,7 @@
         android:layout_alignTop="@+id/ibReply"
         android:layout_toEndOf="@+id/ibReply"
         android:text="7"
-        android:textSize="12sp"/>
+        android:textSize="13sp"/>
 
 
     <ImageButton
@@ -80,7 +81,7 @@
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_marginLeft="115dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/retweet_pics"
         android:background="@color/transparent_white"
         android:tint="@color/transparent_white"
@@ -93,7 +94,7 @@
         android:layout_alignTop="@+id/ibRetweet"
         android:layout_toEndOf="@+id/ibRetweet"
         android:text="200"
-        android:textSize="12sp" />
+        android:textSize="13sp" />
 
     <ImageButton
         android:id="@+id/ibFavorites"
@@ -103,10 +104,11 @@
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_marginLeft="200dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         app:srcCompat="@drawable/favorite_pics"
         android:background="@color/transparent_white"
-        android:tint="@color/transparent_white"/>
+        android:tint="@color/transparent_white"
+        />
 
     <TextView
         android:id="@+id/tvFavoriteCount"
@@ -115,9 +117,9 @@
         android:layout_alignTop="@+id/ibFavorites"
         android:layout_toEndOf="@+id/ibFavorites"
         android:text="200"
-        android:textSize="12sp" />
-
-
+        android:textSize="13sp"
+        android:background="@color/transparent_white"
+        />
 
 
     <!--ImageView
