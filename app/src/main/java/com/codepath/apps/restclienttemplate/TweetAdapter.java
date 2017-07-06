@@ -34,7 +34,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     Context context;
     TwitterClient client;
     private final int greenColor = 0xff17bf63;
-    private final int blackColor = 0xffff0000;
+    private final int blackColor = 0xff0000ff; //
     private final int redColor = 0xffff0000;
     private TweetAdapterListener mListener;
 
@@ -78,22 +78,20 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         holder.tvFavoriteCount.setText(String.valueOf(tweet.favoriteCount));
 
 
-        if(tweet.retweeted) {
-            holder.ibRetweet.setColorFilter(greenColor);
-            holder.tvRetweetCount.setTextColor(greenColor);
-
-        } else {
-            holder.ibRetweet.setColorFilter(blackColor);
-            holder.tvRetweetCount.setTextColor(blackColor);
-
-        }
-        if(tweet.favorited){
-            holder.ibFavorites.setColorFilter(redColor);
-            holder.tvFavoriteCount.setTextColor(redColor);
-        } else {
-            holder.ibFavorites.setColorFilter(blackColor);
-            holder.tvFavoriteCount.setTextColor(blackColor);
-        }
+//        if(tweet.retweeted) {
+//            holder.ibRetweet.setColorFilter(greenColor);
+//            holder.tvRetweetCount.setTextColor(greenColor);
+//        } else {
+//            holder.ibRetweet.setColorFilter(blackColor);
+//            holder.tvRetweetCount.setTextColor(blackColor);
+//        }
+//        if(tweet.favorited){
+//            holder.ibFavorites.setColorFilter(redColor);
+//            holder.tvFavoriteCount.setTextColor(redColor);
+//        } else {
+//            holder.ibFavorites.setColorFilter(blackColor);
+//            holder.tvFavoriteCount.setTextColor(blackColor);
+//        }
 
         String relativeShortTimeAgo = replaceTime(getRelativeTimeAgo(tweet.createdAt));
         holder.tvRelativeTimeStamp.setText(" · " + relativeShortTimeAgo); //20 minutes ago

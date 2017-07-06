@@ -49,18 +49,41 @@
         android:layout_toEndOf="@+id/tvUsername"
         android:layout_marginStart="12dp" />
 
+
     <ImageButton
-        android:id="@+id/ibRetweet"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:id="@+id/ibReply"
+        app:srcCompat="@drawable/reply_outline"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_vector_retweet_stroke"
         android:layout_below="@+id/tvBody"
-        android:layout_marginTop="10dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:layout_marginLeft="50dp"
-        android:tint="@color/transparent_white"
+        android:layout_marginTop="10dp"
         android:background="@color/transparent_white"
+        android:tint="@color/transparent_white" />
+    <TextView
+        android:id="@+id/tvReplyCount"
+        android:layout_width="90dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/ibReply"
+        android:layout_toEndOf="@+id/ibReply"
+        android:text="7"
+        android:textSize="12sp"/>
+
+
+    <ImageButton
+        android:id="@+id/ibRetweet"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:layout_below="@+id/tvBody"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="115dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/retweet_pics"
+        android:background="@color/transparent_white"
+        android:tint="@color/transparent_white"
          />
 
     <TextView
@@ -73,15 +96,15 @@
         android:textSize="12sp" />
 
     <ImageButton
+        android:id="@+id/ibFavorites"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:layout_below="@+id/tvBody"
-        android:id="@+id/ibFavorites"
         android:layout_width="15dp"
         android:layout_height="15dp"
-        android:layout_marginLeft="150dp"
+        android:layout_marginLeft="200dp"
         android:layout_marginTop="10dp"
-        app:srcCompat="@drawable/ic_vector_heart_stroke"
+        app:srcCompat="@drawable/favorite_pics"
         android:background="@color/transparent_white"
         android:tint="@color/transparent_white"/>
 
@@ -93,6 +116,8 @@
         android:layout_toEndOf="@+id/ibFavorites"
         android:text="200"
         android:textSize="12sp" />
+
+
 
 
     <!--ImageView

@@ -40,12 +40,15 @@ android:orientation="vertical">
     android:id="@+id/fabCompose"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@drawable/vector_compose_shortcut"
+    android:src="@drawable/vector_compose_fab"
     app:fabSize="normal"
     android:scaleType="center"
     android:onClick="composeMessage"
     android:layout_alignParentBottom="true"
-    android:layout_alignParentEnd="true" />
+    android:layout_alignParentEnd="true"
+    android:background="@color/transparent_white"
+    android:backgroundTint="@color/twitterBlue"
+    />
 
 
 </RelativeLayout>

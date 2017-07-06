@@ -22,7 +22,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     TwitterClient client;
     Tweet tweet;
-   // boolean isTweet = tweet.uid != null && tweet.uid==uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +71,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         } else {
             client.getAnotherUserInfo(screenName, new JsonHttpResponseHandler() {
-
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                     //deserialize the user object
@@ -88,10 +86,8 @@ public class ProfileActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-
                 @Override
                 public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                    Log.d("profile", screenName);
                     Log.d("profile", errorResponse.toString());
                 }
             });
@@ -101,25 +97,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-//    public void jsonResponse(){
-//        new JsonHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-//                //deserialize the user object
-//                User user = null;
-//                try {
-//                    user = User.fromJSON(response);
-//                    //set the title of the ActionBar based on the user information
-//
-//                    getSupportActionBar().setTitle(user.screenName);
-//                    //populate the user headline
-//                    populateUserHeadline(user);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-//    }
     public void populateUserHeadline(User user){
         TextView tvName = (TextView) findViewById(R.id.tvName);
         TextView tvTagline = (TextView) findViewById(R.id.tvTagline);
