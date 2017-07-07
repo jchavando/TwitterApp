@@ -31,10 +31,11 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
 
     }
     private final int REQUEST_CODE = 20;
-    TweetAdapter tweetAdapter;
-    ArrayList<Tweet> tweets;
-    RecyclerView rvTweets;
+    public TweetAdapter tweetAdapter;
+    public ArrayList<Tweet> tweets;
+    public RecyclerView rvTweets;
     public SwipeRefreshLayout swipeContainer; //do I move this?
+
 
     //inflation happens inside onCreateView
 
@@ -93,6 +94,14 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
         }
     }
 
+
+    //adds one tweet at top
+    public void postTweet(Tweet tweet){
+        tweets.add(0, tweet);
+        tweetAdapter.notifyItemInserted(0);
+        rvTweets.scrollToPosition(0);
+    }
+
     @Override
     public void onItemSelected(View view, int position, boolean isPic) {
        Tweet tweet = tweets.get(position);
@@ -104,18 +113,8 @@ public class TweetsListFragment extends Fragment implements TweetAdapter.TweetAd
 
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-//        // REQUEST_CODE is defined above
-//        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) { //check that code is the same
-//            // Extract name value from result extras
-//
-//            Tweet unwrapped_tweet =  Parcels.unwrap(intent.getParcelableExtra("tweet"));
-//            tweets.add(0, unwrapped_tweet);
-//            tweetAdapter.notifyItemInserted(0);
-//            rvTweets.scrollToPosition(0);
-//
-//        }
-//    }
+
+
+
 
 }

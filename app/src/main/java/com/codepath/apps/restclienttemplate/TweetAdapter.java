@@ -101,7 +101,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
 
 
-
         String relativeShortTimeAgo = replaceTime(getRelativeTimeAgo(tweet.createdAt));
         holder.tvRelativeTimeStamp.setText(" · " + relativeShortTimeAgo); //20 minutes ago
 
@@ -173,7 +172,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
     }
 
     //create ViewHolder class
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView ibProfileImage;
         public TextView tvUsername;
@@ -215,7 +213,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                         //fire the listener callback
                         mListener.onItemSelected(v, position, false);
                     }
-
                 }
             });
 
@@ -247,7 +244,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                                 Log.d("retweet", "error");
                             }
-
                         });
                     }
                 }

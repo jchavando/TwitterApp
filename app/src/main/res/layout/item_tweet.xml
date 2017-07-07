@@ -39,14 +39,14 @@
         android:layout_toEndOf="@+id/ibProfileImage"
         />
 
-
     <TextView
         android:id="@+id/tvRelativeTimeStamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:text="20m" />
+        android:text="20m"
+        android:layout_toEndOf="@+id/tvHandle"/>
 
     <TextView
         android:id="@+id/tvHandle"

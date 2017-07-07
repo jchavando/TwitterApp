@@ -11,8 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.codepath.apps.restclienttemplate.fragments.HomeTimelineFragment;
+import com.codepath.apps.restclienttemplate.fragments.SmartFragmentStatePagerAdapter;
 import com.codepath.apps.restclienttemplate.fragments.TweetsListFragment;
 import com.codepath.apps.restclienttemplate.fragments.TweetsPagerAdapter;
+
+import org.parceler.Parcels;
 
 import static com.codepath.apps.restclienttemplate.R.drawable.home_selected;
 import static com.codepath.apps.restclienttemplate.R.drawable.mentions_selected;
@@ -20,7 +24,10 @@ import static com.codepath.apps.restclienttemplate.R.drawable.mentions_selected;
 //basically now just loads fragments onto the screen
 public class TimelineActivity extends AppCompatActivity implements TweetsListFragment.TweetSelectedListener {
     private final int REQUEST_CODE = 20;
-
+    ViewPager vpPager;
+    private SmartFragmentStatePagerAdapter adapterViewPager;
+    //private FragmentPagerAdapter adapterViewPager;
+    //private TweetsPagerAdapter tweetsPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +36,12 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         setContentView(R.layout.activity_timeline);
 
         //get the view pager
-        ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
-
+        vpPager = (ViewPager) findViewById(R.id.viewpager);
+        adapterViewPager = new TweetsPagerAdapter(getSupportFragmentManager(), this);
         //set the adapter for the pager
-        vpPager.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager(), this));
+        vpPager.setAdapter(adapterViewPager);
+
+
 
         //setup the TabLayout to use the view pager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
@@ -45,6 +54,8 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(null);
+
+
 
     }
 
@@ -60,21 +71,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle presses on the action bar items
-//        switch (item.getItemId()) {
-//            case R.id.miCompose:
-//                composeMessage();
-//                return true;
-//            //case R.id.miProfile:
-//                //showProfileView();
-//               // return true;
-//            default:
-//                return super.onOptionsItemSelected(item);
-//        }
-//    }
-//
+
     public void composeMessage(View v) {
         Intent i = new Intent(this, ComposeActivity.class);
         i.putExtra("tweet", 2);
@@ -105,19 +102,18 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
 
 
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-//        // REQUEST_CODE is defined above
-//        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) { //check that code is the same
-//            // Extract name value from result extras
-//
-//            Tweet unwrapped_tweet =  Parcels.unwrap(intent.getParcelableExtra("tweet"));
-//            tweets.add(0, unwrapped_tweet);
-//            tweetAdapter.notifyItemInserted(0);
-//            rvTweets.scrollToPosition(0);
-//
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        // REQUEST_CODE is defined above
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) { //check that code is the same
+            // Extract name value from result extras
+            Tweet unwrapped_tweet =  Parcels.unwrap(intent.getParcelableExtra("tweet"));
+
+            ((HomeTimelineFragment) adapterViewPager.getRegisteredFragment(0)).postTweet(unwrapped_tweet);
+
+            //((HomeTimelineFragment) vpPager.getAdapter().mFragmentReferences.get(0)).postTweet(unwrapped_tweet);
+        }
+    }
 
 
 

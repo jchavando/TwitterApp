@@ -3,16 +3,18 @@ package com.codepath.apps.restclienttemplate.fragments;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+
+import java.util.ArrayList;
 
 /**
  * Created by jchavando on 7/3/17.
  */
 
-public class TweetsPagerAdapter extends FragmentPagerAdapter {
+public class TweetsPagerAdapter extends SmartFragmentStatePagerAdapter {
 
     private String tabTitles[] = new String[] {"Home", "Mentions"};
     private Context context;
+    public ArrayList<TweetsListFragment> mFragmentReferences = new ArrayList<>();
 
     public TweetsPagerAdapter(FragmentManager fm, Context context){
         super(fm);
@@ -34,8 +36,13 @@ public class TweetsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0){
+            HomeTimelineFragment firstFrag = new HomeTimelineFragment();
+            mFragmentReferences.add(0, firstFrag);
             return new HomeTimelineFragment();
+            //return HomeTimelineFragment.newInstance(0, "Page #1");
         } else if (position == 1){
+            MentionsTimelineFragments secondFrag = new MentionsTimelineFragments();
+            mFragmentReferences.add(1, secondFrag);
             return new MentionsTimelineFragments();
 
         } else {
@@ -43,10 +50,7 @@ public class TweetsPagerAdapter extends FragmentPagerAdapter {
         }
     }
 
-    //return title
-//    @Override
-//    public CharSequence getPageTitle(int position) {
-//        //generate the title based on item position
-//        return tabTitles[position];
-//    }
+
+
+
 }
