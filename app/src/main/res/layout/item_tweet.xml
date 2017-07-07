@@ -30,6 +30,7 @@
         android:text="sample tweet blah blah"
         android:layout_marginLeft="5dp"
         />
+
     <ImageView
         android:id="@+id/ivPic"
         android:layout_width="match_parent"
@@ -63,10 +64,11 @@
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:layout_below="@+id/ivPic"
-        android:layout_width="17dp"
-        android:layout_height="17dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="12dp"
+        android:padding="6dp"
         android:background="@color/transparent_white"
         android:tint="@color/transparent_white"
        />
@@ -77,14 +79,15 @@
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:layout_below="@+id/ivPic"
-
-        android:layout_width="17dp"
-        android:layout_height="17dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="115dp"
         android:layout_marginTop="12dp"
         android:src="@drawable/retweet_pics"
         android:background="@color/transparent_white"
-        android:tint="@color/transparent_white" />
+        android:tint="@color/transparent_white"
+        android:padding="6dp"
+        />
 
     <TextView
         android:id="@+id/tvRetweetCount"
@@ -92,6 +95,7 @@
         android:layout_height="30dp"
         android:layout_alignTop="@+id/ibRetweet"
         android:layout_toEndOf="@+id/ibRetweet"
+        android:layout_marginTop="6dp"
         android:text="200"
         android:textSize="14sp" />
 
@@ -99,12 +103,12 @@
         android:id="@+id/ibFavorites"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:layout_width="17dp"
-        android:layout_height="17dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="200dp"
         android:layout_marginTop="12dp"
         android:layout_below="@+id/ivPic"
-
+        android:padding="6dp"
         app:srcCompat="@drawable/favorite_pics"
         android:background="@color/transparent_white"
         android:tint="@color/transparent_white"
@@ -117,6 +121,7 @@
         android:layout_alignTop="@+id/ibFavorites"
         android:layout_toEndOf="@+id/ibFavorites"
         android:text="200"
+        android:layout_marginTop="6dp"
         android:textSize="14sp"
         android:background="@color/transparent_white"
         />

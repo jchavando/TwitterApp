@@ -9,12 +9,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.fragments.TweetsListFragment;
 import com.codepath.apps.restclienttemplate.fragments.TweetsPagerAdapter;
 
-import static com.codepath.apps.restclienttemplate.R.drawable.ic_vector_home_stroke;
-import static com.codepath.apps.restclienttemplate.R.drawable.ic_vector_notifications_stroke;
+import static com.codepath.apps.restclienttemplate.R.drawable.home_selected;
+import static com.codepath.apps.restclienttemplate.R.drawable.mentions_selected;
 
 //basically now just loads fragments onto the screen
 public class TimelineActivity extends AppCompatActivity implements TweetsListFragment.TweetSelectedListener {
@@ -37,8 +38,8 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(vpPager);
 
-        tabLayout.getTabAt(0).setIcon(ic_vector_home_stroke);
-        tabLayout.getTabAt(1).setIcon(ic_vector_notifications_stroke);
+        tabLayout.getTabAt(0).setIcon(home_selected);
+        tabLayout.getTabAt(1).setIcon(mentions_selected);
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -90,7 +91,7 @@ public class TimelineActivity extends AppCompatActivity implements TweetsListFra
     public void onTweetSelected(Tweet tweet) {
         //move to user's profile
        // Intent intent = new Intent(this, ProfileActivity.class);
-        //Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, tweet.body, Toast.LENGTH_SHORT).show();
     }
 
     @Override
