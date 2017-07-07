@@ -23,7 +23,7 @@ import com.loopj.android.http.RequestParams;
 public class TwitterClient extends OAuthBaseClient {
 	public static final BaseApi REST_API_INSTANCE = TwitterApi.instance(); //FlickrApi.FlickrPerm.WRITE
 	public static final String REST_URL = "https://api.twitter.com/1.1";
-	public static final String REST_CONSUMER_KEY = "MkwRO6BTogWteh3DmqC4KxPRq";
+	public static final String REST_CONSUMER_KEY = "MkwRO6BTogWteh3DmqC4KxPRq"; //
 	public static final String REST_CONSUMER_SECRET = "rnmkgZOJytCWaazJ5sW3KbZm8CSu3tq4DOJfMvKG4LSIIoujh1";
 
 	// Landing page to indicate the OAuth flow worked in case Chrome for Android 25+ blocks navigation back to the app.

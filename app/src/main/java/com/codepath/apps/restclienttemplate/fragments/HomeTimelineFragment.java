@@ -13,6 +13,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -39,18 +41,21 @@ public class HomeTimelineFragment extends TweetsListFragment {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
                 tweetAdapter.clear();
-                tweets.clear();
+                //tweets.clear();
                 Tweet tweet;
+                ArrayList<Tweet> nTweets = new ArrayList<>();
 
                 for (int i = 0; i < response.length(); i++) {
                     try {
                         tweet = Tweet.fromJSON(response.getJSONObject(i));
-                        tweets.add(tweet);
+                        //tweets.add(tweet);
+                        nTweets.add(tweet);
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
-                tweetAdapter.addAll(tweets);
+                tweetAdapter.addAll(nTweets);
                 swipeContainer.setRefreshing(false);
             }
 

@@ -30,6 +30,13 @@
         android:text="sample tweet blah blah"
         android:layout_marginLeft="5dp"
         />
+    <ImageView
+        android:id="@+id/ivPic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvBody"
+        android:layout_toEndOf="@+id/ibProfileImage"
+        />
 
 
     <TextView
@@ -55,20 +62,22 @@
         app:srcCompat="@drawable/reply_outline"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:layout_below="@+id/tvBody"
+        android:layout_below="@+id/ivPic"
         android:layout_width="17dp"
         android:layout_height="17dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="12dp"
         android:background="@color/transparent_white"
-        android:tint="@color/transparent_white" />
+        android:tint="@color/transparent_white"
+       />
 
 
     <ImageButton
         android:id="@+id/ibRetweet"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:layout_below="@+id/tvBody"
+        android:layout_below="@+id/ivPic"
+
         android:layout_width="17dp"
         android:layout_height="17dp"
         android:layout_marginLeft="115dp"
@@ -90,11 +99,12 @@
         android:id="@+id/ibFavorites"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:layout_below="@+id/tvBody"
         android:layout_width="17dp"
         android:layout_height="17dp"
         android:layout_marginLeft="200dp"
         android:layout_marginTop="12dp"
+        android:layout_below="@+id/ivPic"
+
         app:srcCompat="@drawable/favorite_pics"
         android:background="@color/transparent_white"
         android:tint="@color/transparent_white"

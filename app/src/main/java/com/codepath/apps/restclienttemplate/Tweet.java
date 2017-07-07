@@ -2,6 +2,7 @@ package com.codepath.apps.restclienttemplate;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcel;
@@ -20,6 +21,7 @@ public class Tweet {
     public boolean retweeted;
     public long favoriteCount;
     public boolean favorited;
+    public String imageUrl;
 
     public User user;
 
@@ -40,6 +42,17 @@ public class Tweet {
         tweet.retweeted = jsonObject.getBoolean("retweeted");
         tweet.favoriteCount = jsonObject.getLong("favorite_count");
         tweet.favorited = jsonObject.getBoolean("favorited");
+
+
+        try {
+            JSONObject obj = jsonObject.getJSONObject("entities");
+            JSONArray array = obj.getJSONArray("media");
+            tweet.imageUrl = array.getJSONObject(0).getString("media_url_https");
+
+        } catch (JSONException e){
+            tweet.imageUrl = "";
+        }
+
         return tweet;
     }
 }
