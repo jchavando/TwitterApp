@@ -3,6 +3,7 @@ package com.codepath.apps.restclienttemplate;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -107,6 +108,8 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         Glide.with(context).load(tweet.user.profileImageUrl).into(holder.ibProfileImage);
 
         Glide.with(context).load(tweet.imageUrl).into(holder.ivPic);
+
+
 
         holder.ibProfileImage.setOnClickListener(new View.OnClickListener() {
             @Override
